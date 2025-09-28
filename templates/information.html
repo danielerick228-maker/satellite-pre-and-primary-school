@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Information - Satellite Pre & Primary School{% endblock %}
+
+{% block content %}
+<section id="home" class="home">
+    {% if site_content.information_html %}
+        {{ site_content.information_html|safe }}
+    {% else %}
+        <h5>WELCOME</h5>
+        <h6>Welcome to Satellite pre and primary school.</h6>
+        <p>welcome to Satellite pre and primary school, a friendly and caring learning environment where every child is guided to grow with confidence ,displine,and knowledge.</p>
+        <p>We provide quality education from nursery to primary level ,helping learners to bulding strong foundation in academics, creativity,and good behaviour.</p>
+        <p>Our dedicated teachers ensure that each pupil is supported to discover their talents and raech their full potential.</p>
+        <p>At Satellite school,we believe in education for better future.shaping young minds to become responsible and successfull individuals.</p>
+        <p>Join us today and be part of school that truly cares for your child'sfuture.</p>
+    {% endif %}
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Tabs look for Information page only */
+nav .tab{display:inline-block;border-bottom:3px solid transparent;padding:.5rem 1rem;margin:.2rem .3rem;background:transparent}
+nav .tab:hover{border-bottom-color:orange}
+nav .tab.active{border-bottom-color:orange;font-weight:bold}
+</style>
+{% endblock %}

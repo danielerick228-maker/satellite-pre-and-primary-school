@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Contact - Satellite Pre & Primary School{% endblock %}
+
+{% block content %}
+<h1>contacts us</h1>
+<div class="contact">
+    <p>Tunapatikana NYAMADOKE kwa Mlanda barabara ya kwenda kwa Mwl Cloud.</p>
+    <h2>Location: Nyamadoke kwa Mlanda. <br>
+    phone number:+255676585441/+255756964001
+    <p>School address</p>
+    <p>Satellite pre & primary school,</p>
+    <p>P.O BOX 44,</p>
+    <P>BUCHOSA,</P>
+    <P>MWANZA.</P>
+    <p>TANZANIA</p>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Image download functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const clickableImages = document.querySelectorAll('.clickable-image');
+  
+  clickableImages.forEach(img => {
+    img.addEventListener('click', function() {
+      const filename = this.getAttribute('data-filename');
+      if (filename) {
+        const link = document.createElement('a');
+        link.href = `/download/${filename}`;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    });
+  });
+});
+</script>
+{% endblock %}

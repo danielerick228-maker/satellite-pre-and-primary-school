@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Programs{% endblock %}
+
+{% block content %}
+    <section id="programmes" class="programes">
+        <h5>Academic programmes</h5>
+        <p>At Satellite pre and primary school, we offer a rich and diverse curriculum designed to equip our learners with both academic excellence and real-world skills. Our key programmes include:</p>
+        <ul>
+            <li><strong>English language</strong> – Main medium of instruction focusing on speaking, reading, and writing fluently and confidently.</li>
+            <li><strong>French language</strong> – Basic French to help learners become global citizens in a multilingual world.</li>
+            <li><strong>Chinese language</strong> – Introductory Chinese for early advantage in international communication.</li>
+            <li><strong>Computer studies</strong> – From basic skills to digital literacy; using technology creatively and responsibly.</li>
+            <li><strong>Mathematics</strong> – Strong foundation in numeracy, logic, and problem solving.</li>
+            <li><strong>Science</strong> – Encouraging curiosity through hands-on experiments to understand the world.</li>
+            <li><strong>Civics and moral education</strong> – Instilling good manners, discipline, and social responsibility.</li>
+            <li><strong>Physical education</strong> – Promoting fitness, teamwork, and healthy lifestyles through games and exercise.</li>
+            <li><strong>Social studies</strong> – Understanding history, culture, geography, and civic responsibility.</li>
+        </ul>
+        <p><strong>Our goal:</strong> To provide holistic education that develops the mind, body, and character of every child.</p>
+    </section>
+
+    <p><a href="{{ url_for('video') }}" class="btn btn-accent">For more information click here</a></p>
+{% endblock %}

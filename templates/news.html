@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}News - Satellite Pre & Primary School{% endblock %}
+
+{% block content %}
+<h5>News and Events</h5>
+<p>At Satellite Pre & Primary School, we are committed to nurturing confident, disciplined, and knowledgeable learners in a caring environment. Stay updated with the latest announcements and opportunities below.</p>
+<h5>Admissions Update</h5>
+<p>Special offer for the first 100 new pupils — reduced fees for early enrollment this term. Visit our office or contact us for details.</p>
+<h5>Academic Programmes</h5>
+<p>We continue to strengthen our curriculum with English as the medium of instruction, complemented by French and Chinese introductions, computer studies, mathematics, science, civics and moral education, physical education, and social studies.</p>
+<h5>Facilities</h5>
+<p>Our upgraded library and learning spaces support reading, exploration, and hands-on learning to build a strong foundation for every child.</p>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Image download functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const clickableImages = document.querySelectorAll('.clickable-image');
+  
+  clickableImages.forEach(img => {
+    img.addEventListener('click', function() {
+      const filename = this.getAttribute('data-filename');
+      if (filename) {
+        const link = document.createElement('a');
+        link.href = `/download/${filename}`;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    });
+  });
+});
+</script>
+{% endblock %}

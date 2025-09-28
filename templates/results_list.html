@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Results{% endblock %}
+
+{% block content %}
+<div class="results-container">
+    <h1>📄 Results</h1>
+    {% if files %}
+    <ul class="results-list">
+        {% for f in files %}
+        <li>
+            <a href="{{ url_for('public_results', filename=f.name) }}">{{ f.name }}</a>
+            <small>({{ (f.size/1024)|round(1) }} KB)</small>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="no-data">No results published yet. Please check back later.</p>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.results-container { max-width: 900px; margin: 0 auto; padding: 20px; background:white; border-radius:12px; box-shadow:0 5px 20px rgba(0,0,0,0.08); }
+.results-list { list-style:none; padding:0; }
+.results-list li { padding:10px 0; border-bottom:1px solid #eee; }
+.results-list li:last-child { border-bottom:none; }
+.no-data { color:#666; }
+</style>
+{% endblock %}
+
+

@@ -1,0 +1,54 @@
+<footer>
+  <p>
+    powered by <a href="mailto:danieltanganyika@gmail.com" target="_blank">danieltanganyika</a><br />
+    &copy;2025 satellite pre and primary
+  </p>
+  <button id="backToTop" aria-label="Back to top">↑</button>
+  <script>
+    // Active link highlight + sticky and scroll shadow
+    (function(){
+      var path = location.pathname;
+      var nav = document.querySelector('nav');
+      var isNoMotion = document.body.classList.contains('no-motion');
+      if (nav && !isNoMotion) {
+        nav.classList.add('sticky');
+        window.addEventListener('scroll', function(){
+          if (window.scrollY > 10) nav.classList.add('scrolled');
+          else nav.classList.remove('scrolled');
+        });
+      }
+      // Mobile toggle
+      var toggle = document.querySelector('.nav-toggle');
+      if (toggle && nav){
+        toggle.addEventListener('click', function(){
+          var isOpen = nav.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', String(isOpen));
+        });
+      }
+      document.querySelectorAll('nav a').forEach(function(anchor){
+        try{
+          var href = anchor.getAttribute('href') || '';
+          if (href && anchor.href.indexOf(path) !== -1) {
+            anchor.classList.add('active');
+          }
+        }catch(e){}
+      });
+      // Back to top
+      var back = document.getElementById('backToTop');
+      if (back){
+        back.addEventListener('click', function(){ window.scrollTo({top:0, behavior: 'smooth'}); });
+        window.addEventListener('scroll', function(){
+          if (window.scrollY > 300) back.classList.add('show'); else back.classList.remove('show');
+        });
+      }
+      // Reveal-on-scroll
+      var observer = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      }, {threshold: 0.12});
+      document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
+    })();
+  </script>
+</footer>
+

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programs</title>
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <img src="{{ url_for('static', filename='images/logo.jpg') }}">
+  <nav>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <ul id="nav-links" class="nav-links">
+      <a href="{{ url_for('home') }}">home</a>
+      <a href="{{ url_for('about') }}">about</a>
+      <a href="{{ url_for('programes') }}">programes</a>
+      <a href="{{ url_for('contact') }}">contact</a>
+      <a href="{{ url_for('news') }}">news</a>
+             <a href="{{ url_for('signup') }}">signup</a>
+       <a href="{{ url_for('login') }}">login</a>
+       <a href="{{ url_for('application') }}">application</a>
+    </ul>
+  </nav>
+    <section id="programmes" div class="programes">
+   
+        <h5>Academic programmes</h5>
+    <p1>At Satellite pre and primary school,we offer a rich and diverse curicullum designed to equip our learners with both academic excellence andreal-world skills.our key programes inciudes: </p1>
+    <ul>
+        <li>English language</li>As the main medium of instruction,we focus on speaking,reading,and writting fruently and confidently.
+        <li>french language</li>Pupils are introduced to basic french to help them become global citizens in a multilingual word.
+        <li>chinese language</li>We offer introductory chinese to give students an early advantage in international communication.
+        <li>computer studies</li>From basic computer skills to digital literacy,students learn how to use technology creatively and responsibly.
+        <li>mathematics</li>We buld a strong foundation in numeracy,logic and problem solving.
+        <li>science</li>Encouragement curiosity and hands on experiments to understand the world around us.
+        <li>civics and moral education</li>Instilling  good manners,discipline and social responsibility.
+        <li>physical education</li>Promoting fitnes,team wor,and heathly lifestyles through games and exercise.
+        <li>social studies</li>Heiping learners to understand history,cuture,geography and civic responsibility.
+    </ul>
+    <p>Our goals</p>To provide holistic education that developes the mind.body,and character of every child.
+      </section>
+      <a href="{{ url_for('video') }}"> for more informationclick header</a>
+      {% include 'footer.html' %}
+</body>
+</html>

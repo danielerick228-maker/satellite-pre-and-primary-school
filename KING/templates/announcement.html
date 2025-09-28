@@ -1,0 +1,343 @@
+{% extends "base.html" %}
+
+{% block title %}Satellite Pre & Primary School - Home{% endblock %}
+
+{% block content %}
+<div class="home-container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div class="hero-section">
+        <h1 class="main-title">Satellite Pre & Primary School</h1>
+        <h2 class="subtitle">Welcome to Our School</h2>
+        <p class="hero-description">Providing quality education and nurturing young minds for a brighter future</p>
+    </div>
+
+    <div class="marquee-section">
+        <div class="marquee-controls">
+            <button id="ann-pause" class="control-btn">⏸️ Pause</button>
+            <button id="ann-play" class="control-btn" disabled>▶️ Play</button>
+        </div>
+        <div class="marquee" id="ann-marquee">
+            <div class="track">
+                <img src="{{ url_for('static', filename='images/picha2.jpg') }}" alt="School Activities" class="clickable-image" data-filename="picha2.jpg" />
+                <img src="{{ url_for('static', filename='images/picha4.jpg') }}" alt="Learning Environment" class="clickable-image" data-filename="picha4.jpg" />
+                <img src="{{ url_for('static', filename='images/picha5.jpg') }}" alt="Student Life" class="clickable-image" data-filename="picha5.jpg" />
+                <img src="{{ url_for('static', filename='images/jengo1.jpg') }}" alt="School Building" class="clickable-image" data-filename="jengo1.jpg" />
+                <img src="{{ url_for('static', filename='images/jengo2.jpg') }}" alt="Campus View" class="clickable-image" data-filename="jengo2.jpg" />
+                <img src="{{ url_for('static', filename='images/jengo3.jpg') }}" alt="School Facilities" class="clickable-image" data-filename="jengo3.jpg" />
+            </div>
+        </div>
+    </div>
+
+    <div class="info-section">
+        <a href="{{ url_for('information') }}" class="info-link">📚 Click here for more information</a>
+    </div>
+
+    <div class="social-section">
+        <h3 class="social-title">Connect With Us</h3>
+        <div class="social-icons">
+            <img src="{{ url_for('static', filename='images/youtube.jpg') }}" alt="YouTube" class="clickable-image social-icon" data-filename="youtube.jpg" title="Click to download">
+            <img src="{{ url_for('static', filename='images/facebook.jpg') }}" alt="Facebook" class="clickable-image social-icon" data-filename="facebook.jpg" title="Click to download">
+            <img src="{{ url_for('static', filename='images/instagram.jpg') }}" alt="Instagram" class="clickable-image social-icon" data-filename="instagram.jpg" title="Click to download">
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.home-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.hero-section {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    color: white;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.main-title {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.marquee-section {
+    margin-bottom: 40px;
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.marquee-controls {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.control-btn {
+    background: linear-gradient(135deg, #74b9ff, #0984e3);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    margin: 0 10px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(116, 185, 255, 0.3);
+}
+
+.control-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(116, 185, 255, 0.4);
+}
+
+.control-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.marquee {
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.track {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+.track img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.track img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.info-section {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.info-link {
+    display: inline-block;
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    color: white;
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-size: 18px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(238, 90, 36, 0.3);
+}
+
+.info-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(238, 90, 36, 0.4);
+}
+
+.social-section {
+    text-align: center;
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.social-title {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    color: #333;
+    font-weight: 600;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.social-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.social-icon:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 1.4rem;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+    }
+    
+    .track img {
+        width: 250px;
+        height: 150px;
+    }
+    
+    .social-icons {
+        gap: 20px;
+    }
+    
+    .social-icon {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+/* Alert Messages */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function(){
+  var container = document.getElementById('ann-marquee');
+  if(!container) return;
+  var track = container.querySelector('.track');
+  var speed = 60; // pixels per second
+  var x = 0;
+  var playing = true;
+
+  // Duplicate content to create seamless loop
+  track.innerHTML = track.innerHTML + track.innerHTML;
+
+  function step(ts){
+    x -= (speed/60);
+    var width = track.scrollWidth/2; // single set width
+    if (-x >= width) { x = 0; }
+    track.style.transform = 'translateX(' + x + 'px)';
+    requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+
+  // Pause on hover (only if playing)
+  container.addEventListener('mouseenter', function(){ if(playing) speed = 0; });
+  container.addEventListener('mouseleave', function(){ if(playing) speed = 60; });
+
+  // Controls
+  var pauseBtn = document.getElementById('ann-pause');
+  var playBtn = document.getElementById('ann-play');
+  pauseBtn.addEventListener('click', function(){
+    playing = false;
+    speed = 0;
+    pauseBtn.disabled = true;
+    playBtn.disabled = false;
+  });
+  playBtn.addEventListener('click', function(){
+    playing = true;
+    speed = 60;
+    pauseBtn.disabled = false;
+    playBtn.disabled = true;
+  });
+})();
+
+// Image download functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const clickableImages = document.querySelectorAll('.clickable-image');
+  
+  clickableImages.forEach(img => {
+    img.addEventListener('click', function() {
+      const filename = this.getAttribute('data-filename');
+      if (filename) {
+        const link = document.createElement('a');
+        link.href = `/download/${filename}`;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    });
+  });
+});
+</script>
+{% endblock %}

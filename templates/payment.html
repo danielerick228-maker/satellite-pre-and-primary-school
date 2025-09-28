@@ -1,0 +1,376 @@
+{% extends "base.html" %}
+
+{% block title %}Payment - Satellite Pre & Primary School{% endblock %}
+
+{% block content %}
+<div class="payment-container">
+    <div class="payment-form">
+        <div class="payment-header">
+            <h2>💰 Application Payment</h2>
+            <p class="payment-subtitle">Complete your application by paying the required fee</p>
+        </div>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <div class="application-summary">
+            <h3>Application Summary</h3>
+            <div class="summary-details">
+                <p><strong>Student Name:</strong> {{ application.get_student_name() }}</p>
+                <p><strong>Application ID:</strong> #{{ application.id }}</p>
+                <p><strong>Submitted:</strong> {{ application.submitted_at.strftime('%Y-%m-%d %H:%M') }}</p>
+            </div>
+        </div>
+        
+        <div class="payment-details">
+            <h3>Payment Details</h3>
+            <div class="amount-display">
+                <span class="amount">Tsh {{ '{:,.0f}'.format(lipa_namba.amount) }}/=</span>
+                <span class="amount-label">Application Fee</span>
+            </div>
+
+            <div class="control-number-card">
+                <h4>Pay via LIPA NAMBA</h4>
+                <p class="control-number">Till: {{ lipa_namba.till }}</p>
+                <p class="control-note">Name: {{ lipa_namba.name }}</p>
+                <p class="control-note">Amount: Tsh {{ '{:,.0f}'.format(lipa_namba.amount) }}/=</p>
+            </div>
+
+            <div class="payment-instructions">
+                <h4>📱 How to Pay with LIPA NAMBA:</h4>
+                <ol>
+                    <li>Open your mobile money app (M-Pesa, TigoPesa, Airtel Money, HaloPesa, etc.).</li>
+                    <li>Choose LIPA NAMBA / Pay by Till.</li>
+                    <li>Select one Till from the list above.</li>
+                    <li>Enter the corresponding Amount shown for that Till.</li>
+                    <li>Confirm the Name shown, then complete payment.</li>
+                    <li>Keep your payment receipt for verification.</li>
+                </ol>
+            </div>
+            <div class="payment-instructions" style="margin-top: 16px;">
+                <h4>Official LIPA NAMBAs (to avoid confusion)</h4>
+                <ul>
+                    {% if fees_till %}
+                    <li><strong>LIPA NAMBA FOR FEES IS</strong>: Till  ({{ fees_till.name }})</li>
+                    {% endif %}
+                    {% if meals_till %}
+                    <li><strong>MEELS LIPA NAMBA IS</strong>: Till  ({{ meals_till.name }})</li>
+                    {% endif %}
+                    {% if transport_till %}
+                    <li><strong>TRANSPORT LIPA NAMBA IS</strong>: Till  ({{ transport_till.name }})</li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            
+        </div>
+        
+        <div class="payment-note">
+            <p><strong>Note:</strong> Your application will be processed once payment is confirmed. You will receive a confirmation email and SMS.</p>
+        </div>
+        
+        <div class="payment-links">
+            <a href="{{ url_for('home') }}" class="link-back">← Back to Home</a>
+            <a href="{{ url_for('application') }}" class="link-application">📝 View Application</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.payment-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.payment-form {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 600px;
+}
+
+.payment-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.payment-header h2 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.payment-subtitle {
+    color: #666;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.application-summary {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    border-left: 4px solid #667eea;
+}
+
+.application-summary h3 {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.summary-details p {
+    margin: 8px 0;
+    color: #555;
+}
+
+.payment-details {
+    margin-bottom: 30px;
+}
+.control-number-card {
+    background: #f8f9ff;
+    border: 1px solid #e1e5ff;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+.control-number-card h4 { margin: 0 0 10px 0; color: #333; }
+.control-number {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    padding: 12px 14px;
+    background: #fff;
+    border: 1px dashed #667eea;
+    border-radius: 8px;
+    color: #1a1a1a;
+    display: inline-block;
+}
+.control-note { color: #555; margin-top: 8px; }
+
+.payment-details h3 {
+    margin: 0 0 20px 0;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.amount-display {
+    text-align: center;
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+.amount {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.amount-label {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.form-group select,
+.form-group input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+}
+
+.form-group select:focus,
+.form-group input:focus {
+    outline: none;
+    border-color: #667eea;
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-group small {
+    display: block;
+    margin-top: 5px;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.payment-instructions {
+    background: #e3f2fd;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    border-left: 4px solid #2196f3;
+}
+
+.payment-instructions h4 {
+    margin: 0 0 15px 0;
+    color: #1976d2;
+    font-size: 1.1rem;
+}
+
+.payment-instructions ol {
+    margin: 0;
+    padding-left: 20px;
+    color: #1976d2;
+}
+
+.payment-instructions li {
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.btn-pay {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-pay:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+}
+
+.btn-pay:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-icon {
+    font-size: 1.2rem;
+}
+
+.payment-note {
+    background: #fff3cd;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    border-left: 4px solid #ffc107;
+}
+
+.payment-note p {
+    margin: 0;
+    color: #856404;
+    font-size: 0.95rem;
+}
+
+.payment-links {
+    text-align: center;
+    padding-top: 25px;
+    border-top: 1px solid #eee;
+}
+
+.payment-links a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+    margin: 0 15px;
+    transition: color 0.3s ease;
+}
+
+.payment-links a:hover {
+    color: #5a6fd8;
+    text-decoration: underline;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+@media (max-width: 768px) {
+    .payment-form {
+        padding: 25px;
+    }
+    
+    .payment-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .amount {
+        font-size: 2rem;
+    }
+    
+    .payment-links {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .payment-links a {
+        margin: 0;
+    }
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}{% endblock %}
+

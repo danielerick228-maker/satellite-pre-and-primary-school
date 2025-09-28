@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Videos - Satellite Pre & Primary School{% endblock %}
+
+{% block body_class %}video-page{% endblock %}
+
+{% block content %}
+
+
+<div class="flex-images">
+  <figure>
+    <img src="{{ url_for('static', filename='images/library1.jpg') }}" alt="library1" class="clickable-image" data-filename="library1.jpg">
+    <figcaption>Click image to download</figcaption>
+  </figure>
+  <figure>
+    <img src="{{ url_for('static', filename='images/library2.jpg') }}" alt="library2" class="clickable-image" data-filename="library2.jpg">
+    <figcaption>Click image to download</figcaption>
+  </figure>
+  <figure>
+    <img src="{{ url_for('static', filename='images/library3.jpg') }}" alt="library3" class="clickable-image" data-filename="library3.jpg">
+    <figcaption>Click image to download</figcaption>
+  </figure>
+  <figure>
+    <img src="{{ url_for('static', filename='images/library4.jpg') }}" alt="library4" class="clickable-image" data-filename="library4.jpg">
+    <figcaption>Click image to download</figcaption>
+  </figure>
+</div>
+
+<h3>this is our libries for pupils to study</h3>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Image download functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const clickableImages = document.querySelectorAll('.clickable-image');
+  
+  clickableImages.forEach(img => {
+    img.addEventListener('click', function() {
+      const filename = this.getAttribute('data-filename');
+      if (filename) {
+        const link = document.createElement('a');
+        link.href = `/download/${filename}`;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    });
+  });
+});
+</script>
+{% endblock %}

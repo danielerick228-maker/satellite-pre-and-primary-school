@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block title %}Application Details{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <div class="admin-header">
+        <div class="admin-info">
+            <h1>📄 Application Details</h1>
+            <p>{{ application.get_student_name() }} — Status: <strong>{{ application.status|title }}</strong></p>
+        </div>
+        <div class="admin-actions">
+            <a href="{{ url_for('admin_applications') }}" class="btn btn-small">⬅ Back to Applications</a>
+            <a href="{{ url_for('admin_dashboard') }}" class="btn btn-small">🏠 Dashboard</a>
+        </div>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="card">
+        <h2>Student Information</h2>
+        <table class="kv">
+            <tr><th>Full Name</th><td>{{ application.get_student_name() }}</td></tr>
+            <tr><th>Nationality</th><td>{{ application.nationality }}</td></tr>
+            <tr><th>Gender</th><td>{{ application.gender }}</td></tr>
+            <tr><th>Religion</th><td>{{ application.religion or '-' }}</td></tr>
+            <tr><th>Date of Birth</th><td>{{ application.date_of_birth.strftime('%Y-%m-%d') }}</td></tr>
+            <tr><th>Place of Birth</th><td>{{ application.place_of_birth }}</td></tr>
+            <tr><th>Submitted At</th><td>{{ application.submitted_at.strftime('%Y-%m-%d %H:%M') }}</td></tr>
+        </table>
+    </div>
+
+    <div class="grid-2">
+        <div class="card">
+            <h2>Father's Information</h2>
+            <table class="kv">
+                <tr><th>Full Name</th><td>{{ application.father_first_name }} {{ application.father_second_name }} {{ application.father_last_name }}</td></tr>
+                <tr><th>Occupation</th><td>{{ application.father_occupation }}</td></tr>
+                <tr><th>NIDA</th><td>{{ application.father_nida or '-' }}</td></tr>
+                <tr><th>Telephone</th><td>{{ application.father_telephone }}</td></tr>
+                <tr><th>Address</th><td>{{ application.father_address }}</td></tr>
+                <tr><th>Street</th><td>{{ application.father_street or '-' }}</td></tr>
+                <tr>
+                    <th>Photo</th>
+                    <td>
+                        {% if application.father_photo %}
+                            <img src="{{ url_for('static', filename=application.father_photo) }}" alt="Father Photo" class="photo"/>
+                        {% else %}-{% endif %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>Mother's Information</h2>
+            <table class="kv">
+                <tr><th>Full Name</th><td>{{ application.mother_first_name }} {{ application.mother_second_name }} {{ application.mother_last_name }}</td></tr>
+                <tr><th>Occupation</th><td>{{ application.mother_occupation }}</td></tr>
+                <tr><th>NIDA</th><td>{{ application.mother_nida or '-' }}</td></tr>
+                <tr><th>Telephone</th><td>{{ application.mother_telephone }}</td></tr>
+                <tr><th>Address</th><td>{{ application.mother_address }}</td></tr>
+                <tr><th>Street</th><td>{{ application.mother_street or '-' }}</td></tr>
+                <tr>
+                    <th>Photo</th>
+                    <td>
+                        {% if application.mother_photo %}
+                            <img src="{{ url_for('static', filename=application.mother_photo) }}" alt="Mother Photo" class="photo"/>
+                        {% else %}-{% endif %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Guardian (Optional)</h2>
+        <table class="kv">
+            <tr><th>Full Name</th><td>{{ application.guardian_first_name }} {{ application.guardian_last_name }}</td></tr>
+            <tr><th>Occupation</th><td>{{ application.guardian_occupation or '-' }}</td></tr>
+            <tr><th>Telephone</th><td>{{ application.guardian_telephone or '-' }}</td></tr>
+            <tr><th>Address</th><td>{{ application.guardian_address or '-' }}</td></tr>
+            <tr>
+                <th>Photo</th>
+                <td>
+                    {% if application.guardian_photo %}
+                        <img src="{{ url_for('static', filename=application.guardian_photo) }}" alt="Guardian Photo" class="photo"/>
+                    {% else %}-{% endif %}
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>Payment</h2>
+        {% if application.has_paid() %}
+            <p class="paid">✅ Paid</p>
+        {% else %}
+            <p class="unpaid">❌ Unpaid</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.admin-container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+.admin-header { display:flex; justify-content:space-between; align-items:center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color:white; padding: 20px; border-radius: 12px; margin-bottom: 20px; }
+.btn-small { background:#667eea; color:white; padding:10px 16px; border-radius:6px; text-decoration:none; margin-left: 8px; }
+.card { background:#fff; border-radius:12px; padding:20px; box-shadow:0 5px 20px rgba(0,0,0,.08); margin-bottom:20px; }
+.kv { width:100%; border-collapse:collapse; }
+.kv th, .kv td { text-align:left; padding:10px 12px; border-bottom:1px solid #eee; }
+.kv th { width: 220px; color:#555; font-weight:600; background:#fafafa; }
+.grid-2 { display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:20px; }
+.photo { max-height: 140px; border-radius: 8px; border: 1px solid #eee; }
+.paid { color:#155724; background:#d4edda; display:inline-block; padding:6px 12px; border-radius: 8px; }
+.unpaid { color:#721c24; background:#f8d7da; display:inline-block; padding:6px 12px; border-radius: 8px; }
+.alert { padding: 12px; margin: 12px 0; border-radius: 8px; }
+.alert-success { background-color:#d4edda; color:#155724; }
+.alert-error { background-color:#f8d7da; color:#721c24; }
+</style>
+{% endblock %}
+
+

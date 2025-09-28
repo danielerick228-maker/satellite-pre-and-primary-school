@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Transport Payment - Satellite Pre & Primary School{% endblock %}
+
+{% block content %}
+<div class="payment-container">
+    <div class="payment-form">
+        <div class="payment-header">
+            <h2>🚌 Transport Payment</h2>
+            <p class="payment-subtitle">Pay transport via LIPA NAMBA</p>
+        </div>
+
+        <div class="payment-details">
+            <h3>LIPA NAMBA (Transport)</h3>
+            {% set t = tills[0] %}
+            <div class="control-number-card">
+                <h4>Till: {{ t.till }}</h4>
+                <p class="control-note">Name: {{ t.name }}</p>
+            </div>
+
+            <div class="payment-instructions">
+                <h4>📱 How to Pay:</h4>
+                <ol>
+                    <li>Open your mobile money app.</li>
+                    <li>Select LIPA NAMBA / Pay by Till.</li>
+                    <li>Enter the Transport Till above.</li>
+                    <li>Enter the amount as specified in the application form.</li>
+                    <li>Confirm the Name shown, then complete payment.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

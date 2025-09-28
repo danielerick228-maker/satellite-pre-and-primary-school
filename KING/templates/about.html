@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}About - Satellite Pre & Primary School{% endblock %}
+
+{% block content %}
+<section id="about" class="about">
+    <h4>ABOUT US</h4>
+    <p>About satellite pre and primary school </p>
+    <P>Satellite pre and primary school is a modern English medium school found in Geita,dedicated to nurtuting young minds through quality education,discipline and creativity.We believe that every child has the potential to successed when given the right support and environment.</P>
+    <p>Our school provides a safe and friendly atmosphere where pupils are encouraged to explore,ask questions and grow both academically and socially.With committed and qualified teachers,we focus on building strong foundations that prepare our learners for future challenges. </p>
+    <p>At satellite,we don't just teach we inspire .We are shaping  the leaders of tommorow through character,knowldge and excellence.</p><br>
+    <p>Want to learn more visit our school or contactus today</p>
+</section>
+
+<div class="flex-images">
+  <figure>
+    <img src="{{ url_for('static', filename='images/jengo2.jpg') }}" alt="jengo2" class="clickable-image" data-filename="jengo2.jpg">
+    <figcaption>Click image to download</figcaption>
+  </figure>
+  <figure>
+    <img src="{{ url_for('static', filename='images/jengo1.jpg') }}" alt="jengo1" class="clickable-image" data-filename="jengo1.jpg">
+    <figcaption>Click image to download</figcaption>
+  </figure>
+  <figure>
+    <img src="{{ url_for('static', filename='images/jengo3.jpg') }}" alt="jengo3" class="clickable-image" data-filename="jengo3.jpg">
+    <figcaption>Click image to download</figcaption>
+  </figure>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Image download functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const clickableImages = document.querySelectorAll('.clickable-image');
+  
+  clickableImages.forEach(img => {
+    img.addEventListener('click', function() {
+      const filename = this.getAttribute('data-filename');
+      if (filename) {
+        const link = document.createElement('a');
+        link.href = `/download/${filename}`;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    });
+  });
+});
+</script>
+{% endblock %}

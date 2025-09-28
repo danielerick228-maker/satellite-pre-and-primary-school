@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>satellite pre and primary school</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+<body>
+<video controls>
+        <source src="{{ url_for('static', filename='video/DUT_Library_Video(720p).mp4') }}">
+       <p> video to show our libraries</p>
+    </video>
+<div class="flex-images">
+  <figure>
+    <img src="{{ url_for('static', filename='images/library1.jpg') }}" alt="library1">
+    <figcaption><a href="{{ url_for('download_image', filename='library1.jpg') }}">Download</a></figcaption>
+  </figure>
+  <figure>
+    <img src="{{ url_for('static', filename='images/library2.jpg') }}" alt="library2">
+    <figcaption><a href="{{ url_for('download_image', filename='library2.jpg') }}">Download</a></figcaption>
+  </figure>
+  <figure>
+    <img src="{{ url_for('static', filename='images/library3.jpg') }}" alt="library3">
+    <figcaption><a href="{{ url_for('download_image', filename='library3.jpg') }}">Download</a></figcaption>
+  </figure>
+  <figure>
+    <img src="{{ url_for('static', filename='images/library4.jpg') }}" alt="library4">
+    <figcaption><a href="{{ url_for('download_image', filename='library4.jpg') }}">Download</a></figcaption>
+  </figure>
+</div>
+ <h3>this is our libries for pupils to study</h3>
+ <nav>
+   <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+   <ul id="nav-links" class="nav-links">
+     <a href="{{ url_for('home') }}">home</a>
+     <a href="{{ url_for('about') }}">about</a>
+     <a href="{{ url_for('programes') }}">programes</a>
+     <a href="{{ url_for('contact') }}">contact</a>
+     <a href="{{ url_for('news') }}">news</a>
+           <a href="{{ url_for('signup') }}">signup</a>
+      <a href="{{ url_for('login') }}">login</a>
+      <a href="{{ url_for('application') }}">application</a>
+   </ul>
+ </nav>
+ {% include 'footer.html' %}
+</body>
+</html>

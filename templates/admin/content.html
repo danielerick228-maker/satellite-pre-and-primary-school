@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Site Content - Admin{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <div class="admin-header">
+        <div class="admin-info">
+            <h1>📰 Manage Site Content</h1>
+            <p>Update announcement and information content</p>
+        </div>
+        <div class="admin-actions">
+            <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">← Dashboard</a>
+            <a href="{{ url_for('admin_logout') }}" class="btn btn-logout">🚪 Logout</a>
+        </div>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="post" class="content-form">
+        <div class="form-group">
+            <label>Announcement Title</label>
+            <input type="text" name="announcement_title" value="{{ site_content.announcement_title or '' }}" />
+        </div>
+        <div class="form-group">
+            <label>Announcement Subtitle</label>
+            <input type="text" name="announcement_subtitle" value="{{ site_content.announcement_subtitle or '' }}" />
+        </div>
+        <div class="form-group">
+            <label>Announcement Message</label>
+            <textarea name="announcement_message" rows="4">{{ site_content.announcement_message or '' }}</textarea>
+        </div>
+        <div class="form-group">
+            <label>Information Page (HTML allowed)</label>
+            <textarea name="information_html" rows="8">{{ site_content.information_html or '' }}</textarea>
+            <small>Basic HTML tags are allowed. Avoid scripts.</small>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">💾 Save</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.admin-container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+.admin-header { display:flex; justify-content:space-between; align-items:center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color:white; padding: 20px; border-radius: 12px; margin-bottom: 20px; }
+.btn-secondary, .btn-logout { background: rgba(255,255,255,0.2); color:white; padding:10px 18px; border-radius:8px; text-decoration:none; }
+.content-form { background:white; padding:20px; border-radius:12px; box-shadow:0 5px 20px rgba(0,0,0,0.08); }
+.form-group { margin-bottom:16px; }
+.form-group label { display:block; font-weight:600; margin-bottom:8px; color:#333; }
+.form-group input, .form-group textarea { width:100%; padding:12px; border:2px solid #e1e5e9; border-radius:8px; font-size:15px; background:#f8f9fa; }
+.form-group input:focus, .form-group textarea:focus { outline:none; border-color:#667eea; background:white; box-shadow:0 0 0 3px rgba(102,126,234,0.1); }
+.form-actions { text-align:right; }
+.btn-primary { background:#667eea; color:white; padding:12px 20px; border:none; border-radius:8px; cursor:pointer; }
+.alert { padding: 12px; margin: 12px 0; border-radius: 8px; }
+.alert-success { background-color:#d4edda; color:#155724; }
+.alert-error { background-color:#f8d7da; color:#721c24; }
+</style>
+{% endblock %}
+

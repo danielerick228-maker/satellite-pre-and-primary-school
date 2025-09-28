@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Results - Admin{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <div class="admin-header">
+        <div class="admin-info">
+            <h1>📄 Upload Results</h1>
+            <p>Upload result documents (PDF, images, etc.)</p>
+        </div>
+        <div class="admin-actions">
+            <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">← Dashboard</a>
+            <a href="{{ url_for('admin_logout') }}" class="btn btn-logout">🚪 Logout</a>
+        </div>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="post" enctype="multipart/form-data" class="upload-form">
+        <div class="form-group">
+            <label>Choose file</label>
+            <input type="file" name="file" required />
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">⬆️ Upload</button>
+        </div>
+    </form>
+
+    <div class="files-list">
+        <h2>Uploaded Files</h2>
+        {% if files %}
+        <ul>
+            {% for f in files %}
+            <li>
+                <a href="{{ url_for('public_results', filename=f.name) }}">{{ f.name }}</a>
+                <small>({{ (f.size/1024)|round(1) }} KB)</small>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="no-data">No files uploaded yet.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.admin-container { max-width: 900px; margin: 0 auto; padding: 20px; }
+.admin-header { display:flex; justify-content:space-between; align-items:center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color:white; padding: 20px; border-radius: 12px; margin-bottom: 20px; }
+.btn-secondary, .btn-logout { background: rgba(255,255,255,0.2); color:white; padding:10px 18px; border-radius:8px; text-decoration:none; }
+.upload-form { background:white; padding:20px; border-radius:12px; box-shadow:0 5px 20px rgba(0,0,0,0.08); margin-bottom:20px; }
+.form-group { margin-bottom:16px; }
+.form-group label { display:block; font-weight:600; margin-bottom:8px; color:#333; }
+.form-group input[type=file] { width:100%; padding:10px; border:2px solid #e1e5e9; border-radius:8px; background:#f8f9fa; }
+.form-actions { text-align:right; }
+.btn-primary { background:#667eea; color:white; padding:12px 20px; border:none; border-radius:8px; cursor:pointer; }
+.files-list { background:white; padding:20px; border-radius:12px; box-shadow:0 5px 20px rgba(0,0,0,0.08); }
+.files-list ul { list-style:none; padding:0; }
+.files-list li { padding:8px 0; border-bottom:1px solid #eee; }
+.files-list li:last-child { border-bottom:none; }
+.no-data { color:#666; }
+.alert { padding: 12px; margin: 12px 0; border-radius: 8px; }
+.alert-success { background-color:#d4edda; color:#155724; }
+.alert-error { background-color:#f8d7da; color:#721c24; }
+</style>
+{% endblock %}
+
+

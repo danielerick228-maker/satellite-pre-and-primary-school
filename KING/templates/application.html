@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Application Form - Satellite Pre & Primary School</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <style>
+      .application-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      
+      .school-header {
+        text-align: center;
+        margin-bottom: 2rem;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 1rem;
+      }
+      
+      .school-header h1 {
+        color: #007bff;
+        margin-bottom: 0.5rem;
+      }
+      
+      .school-info {
+        font-size: 0.9rem;
+        color: #666;
+        line-height: 1.4;
+      }
+      
+      .payment-structure {
+        background: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+      }
+      
+      .payment-structure h3 {
+        color: #007bff;
+        margin-bottom: 1rem;
+      }
+      
+      .fee-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 1rem;
+      }
+      
+      .fee-table th,
+      .fee-table td {
+        border: 1px solid #ddd;
+        padding: 0.5rem;
+        text-align: center;
+      }
+      
+      .fee-table th {
+        background: #007bff;
+        color: white;
+      }
+      
+      .fee-table tr:nth-child(even) {
+        background: #f2f2f2;
+      }
+      
+      .stationary-list {
+        list-style: none;
+        padding-left: 0;
+      }
+      
+      .stationary-list li {
+        padding: 0.25rem 0;
+        border-bottom: 1px solid #eee;
+      }
+      
+      .stationary-list li:before {
+        content: "• ";
+        color: #007bff;
+        font-weight: bold;
+      }
+      
+      .uniform-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 1rem;
+      }
+      
+      .uniform-table th,
+      .uniform-table td {
+        border: 1px solid #ddd;
+        padding: 0.5rem;
+        text-align: left;
+      }
+      
+      .uniform-table th {
+        background: #007bff;
+        color: white;
+      }
+      
+      .form-section {
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+      }
+      
+      .form-section h3 {
+        color: #007bff;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid #007bff;
+        padding-bottom: 0.5rem;
+      }
+      
+      .form-row {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+      
+      .form-group {
+        flex: 1;
+      }
+      
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+        color: #333;
+      }
+      
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+        box-sizing: border-box;
+      }
+      
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+      }
+      
+      .photo-upload {
+        text-align: center;
+        padding: 2rem;
+        border: 2px dashed #ddd;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+      }
+      
+      .photo-upload:hover {
+        border-color: #007bff;
+      }
+      
+      .submit-btn {
+        width: 100%;
+        padding: 1rem;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-top: 1rem;
+      }
+      
+      .submit-btn:hover {
+        background: #0056b3;
+      }
+      
+      .error-message {
+        color: #dc3545;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+      }
+      
+      .success-message {
+        color: #28a745;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+      }
+      
+      .note {
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        padding: 1rem;
+        border-radius: 5px;
+        margin-bottom: 1rem;
+      }
+      
+      .note strong {
+        color: #856404;
+      }
+
+      /* Alert Messages Styling */
+      .alert {
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+
+      .alert-error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h3>SATELLITE PRE & PRIMARY SCHOOL</h3>
+      <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="School Logo" />
+      <h4>ENGLISH MEDIUM</h4>
+    </header>
+
+    <nav>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      <ul id="nav-links" class="nav-links">
+        <a href="{{ url_for('home') }}">home</a>
+        <a href="{{ url_for('about') }}">about</a>
+        <a href="{{ url_for('programes') }}">programes</a>
+        <a href="{{ url_for('contact') }}">contact</a>
+        <a href="{{ url_for('news') }}">news</a>
+        <a href="{{ url_for('signup') }}">signup</a>
+        <a href="{{ url_for('login') }}">login</a>
+        <a href="{{ url_for('application') }}">application</a>
+      </ul>
+    </nav>
+
+    <main>
+      <div class="application-container">
+        <div class="school-header">
+          <h1>SATELLITE PRE & PRIMARY SCHOOL</h1>
+          <div class="school-info">
+            <p><strong>LOCATION:</strong> NYAMADOKE KWA MLANDA</p>
+            <p><strong>BARABARA YA KWENDA KWA MWL. CLAUD</strong></p>
+            <p><strong>S.L.P 44 BUCHOSA, MWANZA</strong></p>
+            <p><strong>TEL:</strong> 0676-585441 / 0756964001</p>
+          </div>
+        </div>
+
+        <div class="payment-structure">
+          <h3>PAYMENT STRUCTURE</h3>
+          <p><strong>APPLICATION FORM:</strong> 10,000/=</p>
+          <p>Fees are to be paid in 4 quarterly instruments as follows:</p>
+          
+          <table class="fee-table">
+            <thead>
+              <tr>
+                <th>Particulars</th>
+                <th>Jan-March</th>
+                <th>April-June</th>
+                <th>July-Sept</th>
+                <th>Oct-Dec</th>
+                <th>Annual Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>School Fees</strong></td>
+                <td>100,000/=</td>
+                <td>100,000/=</td>
+                <td>100,000/=</td>
+                <td>100,000/=</td>
+                <td>400,000/=</td>
+              </tr>
+              <tr>
+                <td><strong>Meals</strong></td>
+                <td>25,000/=</td>
+                <td>25,000/=</td>
+                <td>25,000/=</td>
+                <td>25,000/=</td>
+                <td>100,000/=</td>
+              </tr>
+              <tr>
+                <td><strong>Transport</strong></td>
+                <td>25,000/=</td>
+                <td>25,000/=</td>
+                <td>25,000/=</td>
+                <td>25,000/=</td>
+                <td>100,000/=</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="payment-structure">
+          <h3>STATIONARY</h3>
+          <ul class="stationary-list">
+            <li>Pencils box (1) Hb Type and 1 Catter Per annual</li>
+            <li>Ream Paper (1) Rubbers (3) and Colour (1 box nataraji)</li>
+            <li>File 1(Rapid, Spring file, executive PVC)</li>
+            <li>Birth certificate copy</li>
+          </ul>
+        </div>
+
+        <div class="payment-structure">
+          <h3>SCHOOL UNIFORM</h3>
+          <table class="uniform-table">
+            <thead>
+              <tr>
+                <th>Items</th>
+                <th>Cost</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Short/Skirt & Shirt uniform</td>
+                <td>35,000/=</td>
+              </tr>
+              <tr>
+                <td>Sport Uniform</td>
+                <td>25,000/=</td>
+              </tr>
+              <tr>
+                <td>Sweater</td>
+                <td>15,000/=</td>
+              </tr>
+              <tr>
+                <td>Socks</td>
+                <td>5,000/=</td>
+              </tr>
+              <tr>
+                <td><strong>Total</strong></td>
+                <td><strong>80,000/=</strong></td>
+              </tr>
+            </tbody>
+          </table>
+          <p><strong>Note:</strong> Shoes should be black in colour</p>
+        </div>
+
+        <div class="note">
+          <strong>PAYMENTS:</strong> All payments should be made in the following NMB Account number: <strong>SATELLITE PRE & PRIMARY SCHOOL</strong><br>
+          <strong>NOTE:</strong> Bank slip should be submitted on opening day.
+        </div>
+
+        {% if error %}
+        <div class="error-message">{{ error }}</div>
+        {% endif %}
+        
+        {% if success %}
+        <div class="success-message">{{ success }}</div>
+        {% endif %}
+
+        {# Flash Messages Display #}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('application') }}" enctype="multipart/form-data">
+          <div class="form-section">
+            <h3>A. STUDENT'S INFORMATION</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="first_name">First Name *</label>
+                <input type="text" id="first_name" name="first_name" required>
+              </div>
+              <div class="form-group">
+                <label for="second_name">Second Name</label>
+                <input type="text" id="second_name" name="second_name">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="surname">Surname *</label>
+                <input type="text" id="surname" name="surname" required>
+              </div>
+              <div class="form-group">
+                <label for="nationality">Nationality *</label>
+                <input type="text" id="nationality" name="nationality" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="gender">Gender *</label>
+                <select id="gender" name="gender" required>
+                  <option value="">Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="religion">Religion</label>
+                <input type="text" id="religion" name="religion">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="date_of_birth">Date of Birth *</label>
+                <input type="date" id="date_of_birth" name="date_of_birth" required>
+              </div>
+              <div class="form-group">
+                <label for="place_of_birth">Place of Birth *</label>
+                <input type="text" id="place_of_birth" name="place_of_birth" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3>B. FATHER'S INFORMATION</h3>
+            <div class="photo-upload">
+              <label for="father_photo">Father's Passport Size Photo</label>
+              <input type="file" id="father_photo" name="father_photo" accept="image/*">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="father_first_name">First Name *</label>
+                <input type="text" id="father_first_name" name="father_first_name" required>
+              </div>
+              <div class="form-group">
+                <label for="father_second_name">Second Name</label>
+                <input type="text" id="father_second_name" name="father_second_name">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="father_last_name">Last Name *</label>
+                <input type="text" id="father_last_name" name="father_last_name" required>
+              </div>
+              <div class="form-group">
+                <label for="father_occupation">Occupation *</label>
+                <input type="text" id="father_occupation" name="father_occupation" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="father_nida">NIDA No</label>
+                <input type="text" id="father_nida" name="father_nida">
+              </div>
+              <div class="form-group">
+                <label for="father_telephone">Telephone *</label>
+                <input type="tel" id="father_telephone" name="father_telephone" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="father_address">Address *</label>
+              <textarea id="father_address" name="father_address" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="father_street">Street</label>
+              <input type="text" id="father_street" name="father_street">
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3>C. MOTHER'S INFORMATION</h3>
+            <div class="photo-upload">
+              <label for="mother_photo">Mother's Passport Size Photo</label>
+              <input type="file" id="mother_photo" name="mother_photo" accept="image/*">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="mother_first_name">First Name *</label>
+                <input type="text" id="mother_first_name" name="mother_first_name" required>
+              </div>
+              <div class="form-group">
+                <label for="mother_second_name">Second Name</label>
+                <input type="text" id="mother_second_name" name="mother_second_name">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="mother_last_name">Last Name *</label>
+                <input type="text" id="mother_last_name" name="mother_last_name" required>
+              </div>
+              <div class="form-group">
+                <label for="mother_occupation">Occupation *</label>
+                <input type="text" id="mother_occupation" name="mother_occupation" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="mother_nida">NIDA No</label>
+                <input type="text" id="mother_nida" name="mother_nida">
+              </div>
+              <div class="form-group">
+                <label for="mother_telephone">Telephone *</label>
+                <input type="tel" id="mother_telephone" name="mother_telephone" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="mother_address">Address *</label>
+              <textarea id="mother_address" name="mother_address" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="mother_street">Street</label>
+              <input type="text" id="mother_street" name="mother_street">
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3>D. GUARDIAN'S INFORMATION (If Applicable)</h3>
+            <div class="photo-upload">
+              <label for="guardian_photo">Guardian's Passport Size Photo</label>
+              <input type="file" id="guardian_photo" name="guardian_photo" accept="image/*">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="guardian_first_name">First Name</label>
+                <input type="text" id="guardian_first_name" name="guardian_first_name">
+              </div>
+              <div class="form-group">
+                <label for="guardian_last_name">Last Name</label>
+                <input type="text" id="guardian_last_name" name="guardian_last_name">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="guardian_occupation">Occupation</label>
+                <input type="text" id="guardian_occupation" name="guardian_occupation">
+              </div>
+              <div class="form-group">
+                <label for="guardian_telephone">Telephone</label>
+                <input type="tel" id="guardian_telephone" name="guardian_telephone">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="guardian_address">Address</label>
+              <textarea id="guardian_address" name="guardian_address" rows="3"></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn">Submit Application Form</button>
+        </form>
+      </div>
+    </main>
+
+    {% include 'footer.html' %}
+  </body>
+</html>

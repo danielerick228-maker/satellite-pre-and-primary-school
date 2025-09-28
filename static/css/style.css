@@ -1,0 +1,515 @@
+:root{
+    --color-bg: #f9fafb;
+    --color-text: #1a202c;
+    --color-primary: #2b6cb0;
+    --color-accent: #f6ad55;
+    --color-muted: #e2e8f0;
+}
+body{
+    background: linear-gradient(180deg, #ffffff 0%, var(--color-bg) 100%);
+    color: var(--color-text);
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+}
+h3{
+color: black;
+text-align: center;
+font-family: fantasy;
+font-size: 50px;
+}
+
+p{
+    font-size: 20px;
+}
+h4{
+    text-align: center;
+    font-size: 60px;
+    font-family: castelar;
+    margin-bottom: 0%;
+}
+h6{
+    text-align: left;
+    font-size: 20px;
+    margin-bottom: 0%;
+}
+nav {
+    position: relative;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-bottom: 2px solid #4a5568;
+    padding: 0.5rem 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Main navigation container */
+.nav-main {
+    text-align: center;
+}
+
+/* Top right authentication buttons */
+.nav-auth {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+nav a{
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    color: #2d3748;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 25px;
+    margin: 0 0.3rem;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+/* Special styling for auth buttons */
+.nav-auth a {
+    background: rgba(255, 255, 255, 0.95);
+    font-size: 14px;
+    padding: 0.4rem 0.8rem;
+    margin: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+nav a:hover{ 
+    background: #ffffff; 
+    color: #667eea;
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    border-color: #667eea;
+}
+/* Responsive nav structure */
+nav .nav-toggle{display:none}
+nav .nav-links{display:flex; gap:.5rem; justify-content:center; flex-wrap:wrap}
+@media (max-width: 768px){
+  nav .nav-toggle{display:inline-block; margin:.5rem auto; padding:.5rem 1rem; font-size:1rem; cursor:pointer}
+  nav .nav-links{display:none; flex-direction:column; align-items:center}
+  nav.open .nav-links{display:flex}
+  
+  /* Mobile navigation adjustments */
+  nav a {
+    font-size: 14px;
+    padding: 0.4rem 0.8rem;
+    margin: 0.2rem;
+  }
+  
+  /* Mobile logo sizing */
+  h3 + img {
+    width: 100px;
+    height: 100px;
+  }
+  
+  /* Mobile auth button positioning */
+  .nav-auth {
+    position: static;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+  
+  .nav-auth a {
+    font-size: 12px;
+    padding: 0.3rem 0.6rem;
+  }
+}
+/* Sticky nav support */
+nav.sticky {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: white;
+}
+nav.scrolled {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+    h5{
+        text-align: center;
+        font-size: 30px;
+    }
+    section { padding: 1.5rem 1rem; }
+    img{
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 0%;
+        border-radius: .5rem;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+        transition: transform .25s ease, box-shadow .25s ease;
+    }
+    img:hover{ transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,0.12); }
+    footer{
+        text-align: center;
+        text-decoration: none;
+        font-size: 15px;
+    }
+    footer a{
+        text-decoration: none;
+        font-size: 15px;
+    }
+
+    /* Global flex layout for image groups */
+    .flex-images {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+    }
+    .flex-images img,
+    .flex-images a {
+        margin: 0;
+    }
+    .flex-images img{ width: 180px; height: 180px; }
+
+    /* Global flexbox for all images across all pages */
+    img {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Video page specific image resizing and layout */
+    .video-page img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .video-page .image-container,
+    .video-page .gallery,
+    .video-page .photo-grid,
+    .video-page .image-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Ensure all image containers use flexbox (but not column layout by default) */
+    .image-container,
+    .gallery,
+    .photo-grid,
+    .image-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Flexbox for navigation images */
+    nav img {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Flexbox for header images */
+header img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+}
+
+    /* Flexbox for section images */
+    section img {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Social icon sizing override (higher specificity to beat `a img`) */
+.social-icons a img {
+    width: 32px;
+    height: 32px;
+    box-shadow: none;
+}
+.social-icons a img:hover{ transform: scale(1.1); }
+
+/* Social icons in announcement page */
+.social-icons img {
+    width: 32px;
+    height: 32px;
+    box-shadow: none;
+    transition: transform 0.2s ease;
+}
+
+.social-icons img:hover {
+    transform: scale(1.1);
+}
+
+/* Shared additions for unified styling */
+h1 {
+    text-align: center;
+}
+h2 {
+    text-align: center;
+}
+header {
+    text-align: center;
+    font-size: 50px;
+}
+
+/* Logo and navigation layout */
+h3 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+/* Logo image styling */
+h3 + img {
+    display: block;
+    margin: 0 auto 1rem;
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+}
+
+/* Navigation spacing after logo */
+h3 + img + nav {
+    margin-top: 1rem;
+}
+a img {
+    max-width: 100%;
+    height: auto;
+}
+video {
+    width: min(100%, 500px);
+    height: auto;
+    display: block;
+    margin: 0 auto 1rem;
+    border-radius: .5rem;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* Page-level motion opt-out */
+.no-motion * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+}
+.no-motion nav {
+    position: static !important;
+    box-shadow: none !important;
+}
+
+/* Announcement marquee */
+.marquee {
+    overflow: hidden;
+    width: 100%;
+}
+.marquee-controls{
+    display:flex;
+    gap:.5rem;
+    justify-content:center;
+    margin:.5rem 0 1rem;
+}
+.marquee-controls button{
+    padding:.4rem .8rem;
+    font-size:1rem;
+    cursor:pointer;
+}
+    .marquee .track {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        will-change: transform;
+        align-items: center;
+        justify-content: center;
+    }
+.marquee img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Nav enhancements */
+nav a.active {
+    outline: 3px solid orange;
+}
+
+/* Cards and buttons */
+.card{ background:#fff; border:1px solid var(--color-muted); border-radius: .75rem; box-shadow: 0 8px 24px rgba(0,0,0,0.06); padding: 1rem; transition: transform .2s ease, box-shadow .2s ease; }
+.card:hover{ transform: translateY(-3px); box-shadow: 0 14px 32px rgba(0,0,0,0.12); }
+.btn{ display:inline-block; padding:.6rem 1rem; border-radius:.5rem; text-decoration:none; background:var(--color-primary); color:#fff; transition: filter .2s ease, transform .15s ease; }
+.btn:hover{ filter:brightness(1.1); transform: translateY(-1px); }
+.btn-accent{ background: var(--color-accent); color: #1a1a1a; }
+
+/* Reveal-on-scroll */
+.reveal{ opacity: 0; transform: translateY(16px); will-change: transform, opacity; transition: opacity .6s ease, transform .6s ease; }
+.reveal.visible{ opacity: 1; transform: none; }
+
+/* Back to top */
+#backToTop{ position: fixed; right: 16px; bottom: 16px; padding:.6rem .8rem; border-radius: 999px; border:none; background: var(--color-primary); color:#fff; box-shadow: 0 8px 24px rgba(0,0,0,0.2); cursor:pointer; display:none; }
+#backToTop.show{ display:block; }
+
+/* Enhanced block layout for images */
+* img {
+    display: block;
+}
+
+/* Logo image in announcement page */
+h1 + img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+/* Image grid layout for cards */
+.image-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem;
+}
+
+.card-item {
+    background: wheat;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    min-width: 220px;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+}
+
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    color: #333;
+}
+
+/* Card images sizing */
+.card-item img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+/* Clickable image styling */
+.clickable-image {
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.clickable-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+/* Responsive image grid */
+@media (max-width: 768px) {
+    .card-item {
+        min-width: 200px;
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+/* Flexbox for any image wrapper or container */
+.image-wrapper,
+.img-wrapper,
+.photo-wrapper,
+.gallery-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+/* Flexbox for main content images */
+main img,
+.content img,
+.article img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem auto;
+}
+
+/* Figure images sizing */
+figure img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+}
+
+/* Responsive flexbox for images */
+@media (max-width: 768px) {
+    /* Mobile responsive overrides */
+    .card-item {
+        min-width: 200px;
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    /* Mobile-specific image sizing */
+    .marquee img {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .flex-images img {
+        width: 140px;
+        height: 140px;
+    }
+    
+    header img {
+        width: 100px;
+        height: 100px;
+    }
+    
+    video {
+        width: min(100%, 400px);
+    }
+    
+    /* Video page mobile layout - maintain column layout */
+    .video-page .flex-images,
+    .video-page .image-grid,
+    .video-page .image-container,
+    .video-page .gallery,
+    .video-page .photo-grid,
+    .video-page .image-wrapper,
+    .video-page .img-wrapper,
+    .video-page .photo-wrapper,
+    .video-page .gallery-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+}
